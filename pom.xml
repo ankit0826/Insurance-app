@@ -39,7 +39,7 @@
     					<environment>Sandbox</environment>
     					<applicationName>int-ins-sys-api-v1</applicationName>
     					<workers>1</workers>
-    					<workerType>Micro</workerType>
+    					<workerType>Micro</workerType> 
     					<objectStoreV2>true</objectStoreV2>
 					</cloudHubDeployment>
 				</configuration>
