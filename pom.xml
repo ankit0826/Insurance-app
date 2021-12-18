@@ -29,6 +29,19 @@
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
+				<configuration>
+					<cloudHubDeployment>
+    					<muleVersion>4.4.0</muleVersion>
+    					<!-- Deploy User Parameter -->
+    					<username>ankit-k-singh</username>
+    					<password>Pratima@02</password>
+    					<!-- Environment Parameter -->
+    					<environment>Sandbox</environment>
+    					<applicationName>int-ins-sys-api-v1-service</applicationName>
+    					<workers>1</workers>
+    					<workerType>Micro</workerType>
+					</cloudHubDeployment>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
