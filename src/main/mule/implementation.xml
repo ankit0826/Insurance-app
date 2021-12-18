@@ -66,7 +66,7 @@ output application/json
 		<logger level="INFO" doc:name="payload" doc:id="43bec305-0188-4952-bd5a-91dd01ae5441" message="#[payload]"/>
 		<choice doc:name="Choice" doc:id="59959937-3fda-4e74-a0bb-54617e9dc94e" >
 			<when expression="#[vars.Source == 'salesforce']">
-				<http:request method="POST" doc:name="Insert to Salesforce DB" doc:id="d384a22e-5fe1-475a-93b3-c2201244030a" path="/api/data" config-ref="SF_Request_config"/>
+				<http:request method="POST" doc:name="Insert to SalesForce DB" doc:id="d384a22e-5fe1-475a-93b3-c2201244030a" path="/api/data" config-ref="SF_Request_config"/>
 			</when>
 			<otherwise >
 				<http:request method="POST" doc:name="Insert to PostgreSQL DB" doc:id="dbaae1ca-05c5-4727-88f3-59379b25c4d8" path="/api/data" config-ref="PSQL_Request_config"/>
