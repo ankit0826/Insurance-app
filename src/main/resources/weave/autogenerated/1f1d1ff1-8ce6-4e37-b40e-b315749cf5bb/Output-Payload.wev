@@ -1,0 +1,32 @@
+%dw 2.0
+
+type auto_1f1d1ff1_8ce6_4e37_b40e_b315749cf5bb_Output_Payload = {|
+  "0": org_mule_runtime_api_message_Message, 
+  "1": org_mule_runtime_api_message_Message_25
+|}
+type org_mule_runtime_api_message_Message_25 = {|
+  payload: {|
+    id: Number {"typeId": "int"}, 
+    "Insurance provider": String, 
+    Status: "Eligible" | "Not Eligible", 
+    Amount: Number
+  |}, 
+  attributes: org_mule_extension_http_api_HttpRequestAttributes
+|} {"typeId": "org.mule.runtime.api.message.Message"}
+type org_mule_extension_http_api_HttpRequestAttributes = org_mule_extension_http_api_HttpRequestAttributes
+
+
+
+
+type org_mule_runtime_api_message_Message = {|
+  payload: {|
+    id: Number {"typeId": "int"}, 
+    "Insurance provider": String, 
+    Status: "Eligible" | "Not Eligible", 
+    Amount: Number
+  |}, 
+  attributes: org_mule_extension_http_api_HttpRequestAttributes
+|} {"typeId": "org.mule.runtime.api.message.Message"}
+
+
+

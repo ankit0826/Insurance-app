@@ -1,0 +1,10 @@
+sf:
+  host: "int-sys-slf-api-v1.us-e2.cloudhub.io"
+  port: "80"
+  
+psql:
+  host: "ins-sys-pos-api-v1.us-e2.cloudhub.io"
+  port: "80"
+  
+http:
+  port: '8081'

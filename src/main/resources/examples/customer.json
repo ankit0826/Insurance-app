@@ -1,0 +1,9 @@
+{
+  "ID": 1,
+  "name": "Ankit",
+  "email": "abc@gmail.com",
+  "phone": 1234567890,
+  "age": 26,
+  "salary": 500000,
+  "health issue": 2
+}

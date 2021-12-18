@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="implementationFlow" doc:id="1f1d1ff1-8ce6-4e37-b40e-b315749cf5bb" >
+		<set-variable value="#[attributes.queryParams.source]" doc:name="Source" doc:id="f8dab740-3c4f-4b14-bd19-16e60ed0a768" variableName="Source"/>
+		<scatter-gather doc:name="Scatter-Gather" doc:id="39c08509-20d8-4e57-8a18-4b942ac00f16" >
+			<route >
+				<ee:transform doc:name="Transform Message" doc:id="4430a035-c6f4-4e41-abf7-ce543a083d29" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+var check =
+	if ( payload.age  < 60 and payload."health issue"<5) 
+		'Eligible'
+	else
+		'Not Eligible'
+	
+---
+{
+	ID: payload.ID,
+	Company: 'Aegon Life Insurance',
+    Status: check,
+    Amount: payload.salary + (0.40 * payload.salary)
+	
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+				<set-payload value="#[payload]" doc:name="Aegon Life Insurance" doc:id="19897f01-88fa-4c1a-a986-a2f070db6e2e" />
+			</route>
+			<route >
+				<ee:transform doc:name="Transform Message" doc:id="6022bdb8-0f87-4167-a71d-a6df3474e25a" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+var check =
+	if ( payload.age  < 55 and payload."health issue"<4) 
+		'Eligible'
+	else
+		'Not Eligible'
+	
+---
+{
+	ID: payload.ID,
+	Company: 'Bajaj Allianz Life Insurance',
+    Status: check,
+    Amount: payload.salary + (0.30 * payload.salary)
+	
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+				<set-payload value="#[payload]" doc:name="Bajaj Allianz Life Insurance" doc:id="5d107271-d98d-4986-9253-de28dc7ec7a8" />
+			</route>
+		</scatter-gather>
+		<ee:transform doc:name="Transform Message" doc:id="7458b928-008c-4897-90b0-921ff96b658c" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+(payload pluck((value,key,index)-> value.payload))]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="payload" doc:id="43bec305-0188-4952-bd5a-91dd01ae5441" message="#[payload]"/>
+		<choice doc:name="Choice" doc:id="59959937-3fda-4e74-a0bb-54617e9dc94e" >
+			<when expression="#[vars.Source == 'salesforce']">
+				<http:request method="POST" doc:name="Insert to Salesforce DB" doc:id="d384a22e-5fe1-475a-93b3-c2201244030a" path="/api/data" config-ref="SF_Request_config"/>
+			</when>
+			<otherwise >
+				<http:request method="POST" doc:name="Insert to PostgreSQL DB" doc:id="dbaae1ca-05c5-4727-88f3-59379b25c4d8" path="/api/data" config-ref="PSQL_Request_config"/>
+			</otherwise>
+		</choice>
+	</flow>
+</mule>
