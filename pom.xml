@@ -37,7 +37,7 @@
     					<password>Pratima@02</password>
     					<!-- Environment Parameter -->
     					<environment>Sandbox</environment>
-    					<applicationName>int-ins-sys-api-v1-service</applicationName>
+    					<applicationName>int-ins-sys-api-v1</applicationName>
     					<workers>1</workers>
     					<workerType>Micro</workerType>
     					<objectStoreV2>true</objectStoreV2>
